@@ -81,7 +81,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             ConstraintMap params = new ConstraintMap();
                             params.putString("event","token");
                             params.putString("code","-1");
-                            params.putString("value","初始化失败");
+                            params.putString("value","");
                             eventSink.success(params.toMap());
                         }
                         Log.e("获取token失败：", "");
@@ -156,7 +156,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                         ConstraintMap params = new ConstraintMap();
                         params.putString("event","checkBindOrNot");
                         params.putString("code","-1");
-                        params.putString("value","设备绑定异常:"+retObject.mMsg);
+                        params.putString("value","设备绑定异常:");
                         eventSink.success(params.toMap());
                     }
                     Log.e("无线配对校验：", retObject.mMsg);
