@@ -70,7 +70,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             ConstraintMap params = new ConstraintMap();
                             params.putString("event","token");
                             params.putString("code","0");
-                            params.putString("value","初始化成功");
+                            params.putString("value",accessToken);
                             eventSink.success(params.toMap());
                         }
                         Log.e("获取token成功：", accessToken);
