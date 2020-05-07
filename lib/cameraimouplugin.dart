@@ -17,8 +17,8 @@ class Cameraimouplugin {
       String ssid, String ssidPwd, String deviceId) async {
     final String version = await _channel.invokeMethod(
         'bind_camera', <String, dynamic>{
-      'ssid': ssid,
-      'ssidPwd': ssidPwd,
+      'ssId': ssid,
+      'ssIdPwd': ssidPwd,
       'deviceId': deviceId
     });
     return version;

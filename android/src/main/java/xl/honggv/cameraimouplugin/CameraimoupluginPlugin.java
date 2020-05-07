@@ -90,12 +90,12 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             });
         }else if (call.method.equals("bind_camera")) {
             ///获取参数
-            final String ssid = call.argument("ssid");
-            final String ssidPwd = call.argument("ssidPwd");
+            final String ssId = call.argument("ssId");
+            final String ssIdPwd = call.argument("ssIdPwd");
             final String deviceId = call.argument("deviceId");
 
             ///无线配对校验
-            checkBindOrNot(ssid, ssidPwd, deviceId, result);
+            checkBindOrNot(ssId, ssIdPwd, deviceId, result);
         }else if (call.method.equals("un_bind_camera")){
             final String deviceId = call.argument("deviceId");
             unBindDevice(deviceId,result);
