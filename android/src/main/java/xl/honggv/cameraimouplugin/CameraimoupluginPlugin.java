@@ -93,20 +93,21 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             final String ssId = call.argument("ssId");
             final String ssIdPwd = call.argument("ssIdPwd");
             final String deviceId = call.argument("deviceId");
-
+            final String token = call.argument("token");
             ///无线配对校验
-            checkBindOrNot(ssId, ssIdPwd, deviceId, result);
+            checkBindOrNot(ssId, ssIdPwd, deviceId, token);
         }else if (call.method.equals("un_bind_camera")){
             final String deviceId = call.argument("deviceId");
-            unBindDevice(deviceId,result);
+            final String token = call.argument("token");
+            unBindDevice(deviceId,token);
         }else {
             result.notImplemented();
         }
     }
 
     ///无线配对校验
-    private void checkBindOrNot(final String ssid, final String ssid_pwd, final String deviceId, final Result result) {
-        Business.getInstance().checkBindOrNot(deviceId, new Handler() {
+    private void checkBindOrNot(final String ssid, final String ssid_pwd, final String deviceId, final String token) {
+        Business.getInstance().checkBindOrNot(deviceId,token, new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 // TODO Auto-generated method stub
@@ -124,7 +125,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             eventSink.success(params.toMap());
                         }
                         ///开启设备查找绑定流程
-                        showWifiConfig(ssid, ssid_pwd, deviceId,result);
+                        showWifiConfig(ssid, ssid_pwd, deviceId,token);
                     } else if (resp.data.isBind && resp.data.isMine) {
                         ///设备已经被自己绑定
 //                        result.error("-2","无线配对校验",retObject.mMsg);
@@ -166,8 +167,8 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
 
 
     //解绑设备
-    private void unBindDevice(String deviceId, final Result result){
-        Business.getInstance().unBindDevice(deviceId, new Handler() {
+    private void unBindDevice(String deviceId, final String token){
+        Business.getInstance().unBindDevice(deviceId,token, new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 Business.RetObject retObject = (Business.RetObject) msg.obj;
@@ -195,8 +196,8 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
         });
     }
 
-    private void showWifiConfig(String ssid, String ssid_pwd, final String deviceId, final Result result) {
-        Business.getInstance().showWifiConfig(ssid, ssid_pwd, deviceId, new Handler() {
+    private void showWifiConfig(String ssid, String ssid_pwd, final String deviceId, final String token) {
+        Business.getInstance().showWifiConfig(ssid, ssid_pwd, deviceId,token, new Handler() {
             public void handleMessage(final Message msg) {
                 if (msg.what < 0) {
                     if (msg.what == -2) {
@@ -238,24 +239,24 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                     eventSink.success(params.toMap());
                 }
                 ///查询设备是否在线
-                initDevice((DeviceInitInfo) msg.obj, deviceId, result);
+                initDevice((DeviceInitInfo) msg.obj, deviceId,token);
             }
         });
     }
 
-    private void initDevice(DeviceInitInfo deviceInitInfo, final String deviceId, final Result result) {
+    private void initDevice(DeviceInitInfo deviceInitInfo, final String deviceId,final String token) {
         final int status = deviceInitInfo.mStatus;
         //not support init
         if (status == 0) {
             ///检查设备是否在线
-            checkOnline(deviceId,result);
+            checkOnline(deviceId,token);
         } else {
             if (status == 0 || status == 2) {
 //                if (Business.getInstance().isOversea)
 //                    checkPwdValidity(deviceId, deviceInitInfo.mIp, deviceInitInfo.mPort, key, mHandler);
 //                else
                 ///检查设备是否在线
-                checkOnline(deviceId,result);
+                checkOnline(deviceId,token);
             } else if (status == 1) {
                 Business.getInstance().initDevice(deviceInitInfo.mMac, key, new Handler() {
                     public void handleMessage(Message msg) {
@@ -271,7 +272,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             }
                             Log.e("设备初始化成功：", "设备初始化成功");
                             ///检查设备是否在线
-                            checkOnline(deviceId,result);
+                            checkOnline(deviceId,token);
                         } else {
                             if (eventSink != null){
                                 ConstraintMap params = new ConstraintMap();
@@ -292,8 +293,8 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
     /**
      * 校验在线
      */
-    private void checkOnline(final String deviceId, final Result result) {
-        Business.getInstance().checkOnline(deviceId,
+    private void checkOnline(final String deviceId,final String token) {
+        Business.getInstance().checkOnline(deviceId,token,
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
@@ -309,7 +310,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                         eventSink.success(params.toMap());
                                     }
 //                                    result.success("检查设备是否在线成功");
-                                    unBindDeviceInfo(deviceId,result);
+                                    unBindDeviceInfo(deviceId,token);
                                 } else {
 //                                    result.error("-4","检查设备是否在线失败",null);
                                     if (eventSink != null){
@@ -347,19 +348,19 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
 
     }
 
-    private void unBindDeviceInfo(final String deviceId,final Result result) {
-        Business.getInstance().unBindDeviceInfo(deviceId, new Handler() {
+    private void unBindDeviceInfo(final String deviceId,final String mToken) {
+        Business.getInstance().unBindDeviceInfo(deviceId,mToken, new Handler() {
             public void handleMessage(Message msg) {
                 String message = (String) msg.obj;
                 //				Log.d(tag, "unBindDeviceInfo,"+message);
                 if (msg.what == 0) {
                     if (message.contains("Auth")) {
-                        bindDevice(deviceId,result);
+                        bindDevice(deviceId,mToken);
                     } else if (message.contains("RegCode")) {
-                        bindDevice(deviceId,result);
+                        bindDevice(deviceId,mToken);
                     } else {
                         String key = "";
-                        bindDevice(deviceId,result);
+                        bindDevice(deviceId,mToken);
                     }
                 } else {
                     if (eventSink != null){
@@ -378,9 +379,9 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
     /**
      * 绑定
      */
-    private void bindDevice(String deviceId,final Result result) {
+    private void bindDevice(String deviceId,final String token) {
         //设备绑定
-        Business.getInstance().bindDevice(deviceId, key,
+        Business.getInstance().bindDevice(deviceId, key,token,
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {

@@ -85,13 +85,13 @@ public class Business {
      *            序列号
      * @param handler
      */
-    public void bindDevice(final String deviceID, final String key,
+    public void bindDevice(final String deviceID, final String key,final String mToken,
                            final Handler handler) {
-        bindDevice(deviceID, key, key, handler);
+        bindDevice(deviceID, key, key,mToken, handler);
     }
 
     public void bindDevice(final String deviceID, final String code,
-                           final String key, final Handler handler) {
+                           final String key,final String mToken, final Handler handler) {
 
         TaskPoolHelper.addTask(new TaskPoolHelper.RunnableTask("real") {
 
@@ -114,7 +114,7 @@ public class Business {
     /**
      * 为账号解绑设备
      */
-    public void unBindDevice(final String deviceID, final Handler handler) {
+    public void unBindDevice(final String deviceID,final String mToken, final Handler handler) {
 
         TaskPoolHelper.addTask(new TaskPoolHelper.RunnableTask("real") {
             @Override
@@ -136,13 +136,14 @@ public class Business {
      * @param deviceId
      * @param handler
      */
-    public void checkBindOrNot(final String deviceId,final Handler handler) {
+    public void checkBindOrNot(final String deviceId,final String token,final Handler handler) {
         TaskPoolHelper.addTask(new TaskPoolHelper.RunnableTask("real") {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
                 CheckDeviceBindOrNot req = new CheckDeviceBindOrNot();
-                req.data.token = mToken;
+                mToken = token;
+                req.data.token = token;
                 req.data.deviceId = deviceId; // 设备id。
                 // CheckDeviceBindOrNot.Response resp = null;
                 RetObject retObject = null;
@@ -160,11 +161,11 @@ public class Business {
     /**
      * 开启无线配网流程（权限检查，配对说明）
      */
-    public void showWifiConfig(String ssid,String ssid_pwd,String deviceId,Handler handler) {
+    public void showWifiConfig(String ssid,String ssid_pwd,String deviceId,String token,Handler handler) {
         boolean isMinSDKM = Build.VERSION.SDK_INT < 23;
 //        boolean isGranted = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 //        if (isMinSDKM) {
-
+            mToken = token;
             startConfig(ssid,ssid_pwd,deviceId,handler);
             // 开启无线配对
 //            return;
@@ -229,12 +230,13 @@ public class Business {
      * @param deviceId
      * @param handler
      */
-    public void checkOnline(final String deviceId, final Handler handler) {
+    public void checkOnline(final String deviceId, final String token, final Handler handler) {
         TaskPoolHelper.addTask(new TaskPoolHelper.RunnableTask("real") {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
                 DeviceOnline req = new DeviceOnline();
+                mToken = token;
                 req.data.token = mToken;
                 req.data.deviceId = deviceId; // 设备id。
                 RetObject retObject = null;
@@ -248,7 +250,7 @@ public class Business {
         });
     }
 
-    public void unBindDeviceInfo(final String deviceID, final Handler handler){
+    public void unBindDeviceInfo(final String deviceID,final String mToken, final Handler handler){
         TaskPoolHelper.addTask(new TaskPoolHelper.RunnableTask("real") {
             @Override
             public void run() {

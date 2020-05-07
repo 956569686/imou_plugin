@@ -96,11 +96,11 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<void> bindCamera(String ssid,String ssidPwd,String deviceId) async {
+  Future<void> bindCamera(String ssid,String ssidPwd,String deviceId,String token) async {
     String bindResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      bindResult = await Cameraimouplugin.loginAndBind(ssid, ssidPwd, deviceId);
+      bindResult = await Cameraimouplugin.loginAndBind(ssid, ssidPwd, deviceId,token);
     } on PlatformException {
       bindResult = '摄像头绑定异常.';
     }
@@ -115,11 +115,11 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<void> unBindCamera(String deviceId) async {
+  Future<void> unBindCamera(String deviceId,String token) async {
     String unBindResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      unBindResult = await Cameraimouplugin.unBindDevice(deviceId);
+      unBindResult = await Cameraimouplugin.unBindDevice(deviceId,token);
     } on PlatformException {
       unBindResult = '解绑摄像头异常.';
     }
@@ -148,7 +148,7 @@ class _MyAppState extends State<MyApp> {
             ),
 
             FlatButton(
-              onPressed: () => bindCamera("hgwl","hgwl1234567890","5E04159PAJE23AE"),
+              onPressed: () => bindCamera("hgwl","hgwl1234567890","5E04159PAJE23AE",_platformVersion),
               child: Container(
                 width: 200,
                 height: 50,
@@ -166,7 +166,7 @@ class _MyAppState extends State<MyApp> {
             ),
 
             FlatButton(
-              onPressed: () => unBindCamera("5E04159PAJE23AE"),
+              onPressed: () => unBindCamera("5E04159PAJE23AE",_platformVersion),
               child: Container(
                 width: 200,
                 height: 50,
