@@ -1,8 +1,7 @@
 name: cameraimouplugin
 description: A new Flutter plugin.
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/956569686/imou_plugin.git
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

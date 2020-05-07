@@ -1,5 +1,8 @@
 package xl.honggv.cameraimouplugin;
 
+import android.app.Activity;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -152,7 +155,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                         ConstraintMap params = new ConstraintMap();
                         params.putString("event","checkBindOrNot");
                         params.putString("code","-1");
-                        params.putString("value","设备绑定异常");
+                        params.putString("value","设备绑定异常:"+retObject.mMsg);
                         eventSink.success(params.toMap());
                     }
                     Log.e("无线配对校验：", retObject.mMsg);

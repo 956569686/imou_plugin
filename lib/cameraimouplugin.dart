@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 class Cameraimouplugin {
   static const MethodChannel _channel = const MethodChannel('cameraimouplugin');
 
+
   ///初始化获取AccessToken
   static Future<String> getAccessToken() async {
     final String version = await _channel.invokeMethod('init');
