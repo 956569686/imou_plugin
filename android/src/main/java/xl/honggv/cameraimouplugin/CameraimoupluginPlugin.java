@@ -105,7 +105,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                     eventSink.success(params.toMap());
                 }
             } else {
-                checkBindOrNot(ssId, ssIdPwd, deviceId, token);
+                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
             }
 //            checkBindOrNot("hgwl", "hgwl1234567890", "5E04159PAJE23AE", "At_00005069d8ea210a49348026d1fe5489");
         } else if (call.method.equals("un_bind_camera")) {
