@@ -270,7 +270,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                 ///检查设备是否在线
                 checkOnline(deviceId, token);
             } else if (status == 1) {
-                Business.getInstance().initDevice(deviceInitInfo.mMac, "", new Handler() {
+                Business.getInstance().initDevice(deviceInitInfo.mMac, key.trim(), new Handler() {
                     public void handleMessage(Message msg) {
                         String message = (String) msg.obj;
                         if (msg.what == 0) {
