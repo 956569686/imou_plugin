@@ -156,7 +156,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                         ConstraintMap params = new ConstraintMap();
                         params.putString("event","checkBindOrNot");
                         params.putString("code","-1");
-                        params.putString("value","设备绑定异常:");
+                        params.putString("value","设备绑定异常:\n"+retObject.mMsg);
                         eventSink.success(params.toMap());
                     }
                     Log.e("无线配对校验：", retObject.mMsg);
@@ -218,7 +218,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             ConstraintMap params = new ConstraintMap();
                             params.putString("event","checkBindOrNot");
                             params.putString("code","-1");
-                            params.putString("value","设备查找失败");
+                            params.putString("value","设备查找失败:\n"+msg.obj);
                             eventSink.success(params.toMap());
                         }
                         Log.e("无线添加设备：", "设备查找失败");
