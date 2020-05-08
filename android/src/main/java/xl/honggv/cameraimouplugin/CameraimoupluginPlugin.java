@@ -90,16 +90,16 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             });
         }else if (call.method.equals("bind_camera")) {
             ///获取参数
-            final String ssId = call.argument("ssId");
-            final String ssIdPwd = call.argument("ssIdPwd");
-            final String deviceId = call.argument("deviceId");
-            final String token = call.argument("token");
+            String ssId = call.argument("ssId");
+            String ssIdPwd = call.argument("ssIdPwd");
+            String deviceId = call.argument("deviceId");
+            String token = call.argument("token");
             ///无线配对校验
-//            checkBindOrNot(ssId, ssIdPwd, deviceId, token);
-            checkBindOrNot("hgwl", "hgwl1234567890", "5E04159PAJE23AE", "At_00005069d8ea210a49348026d1fe5489");
+            checkBindOrNot(ssId, ssIdPwd, deviceId, token);
+//            checkBindOrNot("hgwl", "hgwl1234567890", "5E04159PAJE23AE", "At_00005069d8ea210a49348026d1fe5489");
         }else if (call.method.equals("un_bind_camera")){
-            final String deviceId = call.argument("deviceId");
-            final String token = call.argument("token");
+            String deviceId = call.argument("deviceId");
+            String token = call.argument("token");
             unBindDevice(deviceId,token);
         }else {
             result.notImplemented();
