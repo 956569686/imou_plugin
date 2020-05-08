@@ -24,7 +24,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class CameraimoupluginPlugin implements MethodCallHandler {
 
     //初始化密匙
-    String key = "HGWL123456";
+    String key = "hgwL123456";
 
     private EventChannel.EventSink eventSink = null;
 
@@ -63,7 +63,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                 public void handleMessage(Message msg) {
                     if (0 == msg.what) {
                         String accessToken = (String) msg.obj;
-                        Business.getInstance().setToken(accessToken);
+//                        Business.getInstance().setToken(accessToken);
                         ///获取accessToken成功
 
                         if (eventSink != null){
@@ -359,7 +359,6 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                     } else if (message.contains("RegCode")) {
                         bindDevice(deviceId,mToken);
                     } else {
-                        String key = "";
                         bindDevice(deviceId,mToken);
                     }
                 } else {
@@ -381,7 +380,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
      */
     private void bindDevice(String deviceId,final String token) {
         //设备绑定
-        Business.getInstance().bindDevice(deviceId, key,token,
+        Business.getInstance().bindDevice(deviceId,key,token,
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
@@ -399,7 +398,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             if (eventSink != null){
                                 ConstraintMap params = new ConstraintMap();
                                 params.putString("event","checkBindOrNot");
-                                params.putString("value","设备绑定失败");
+                                params.putString("value","设备绑定失败,请重置摄像机");
                                 eventSink.success(params.toMap());
                             }
 //                            result.error("-6","设备绑定失败",null);

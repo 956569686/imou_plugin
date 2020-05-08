@@ -42,7 +42,7 @@ public class Business {
         return Instance.instance;
     }
 
-    private String mToken = ""; // userToken或accessToken
+//    private String mToken = ""; // userToken或accessToken
 
     private String mHost = "openapi.lechange.cn:443";
     private String mAppId = "lc5bcb62d07bd146dd";
@@ -58,9 +58,9 @@ public class Business {
      *
      * @param mToken
      */
-    public void setToken(String mToken) {
-        this.mToken = mToken;
-    }
+//    public void setToken(String mToken) {
+//        this.mToken = mToken;
+//    }
 
     /**
      * 管理员登陆设备
@@ -85,14 +85,8 @@ public class Business {
      *            序列号
      * @param handler
      */
-    public void bindDevice(final String deviceID, final String key,final String mToken,
+    public void bindDevice(final String deviceID, final String code,final String mToken,
                            final Handler handler) {
-        bindDevice(deviceID, key, key,mToken, handler);
-    }
-
-    public void bindDevice(final String deviceID, final String code,
-                           final String key,final String mToken, final Handler handler) {
-
         TaskPoolHelper.addTask(new TaskPoolHelper.RunnableTask("real") {
 
             @Override
@@ -142,7 +136,6 @@ public class Business {
             public void run() {
                 // TODO Auto-generated method stub
                 CheckDeviceBindOrNot req = new CheckDeviceBindOrNot();
-                mToken = token;
                 req.data.token = token;
                 req.data.deviceId = deviceId; // 设备id。
                 // CheckDeviceBindOrNot.Response resp = null;
@@ -165,7 +158,6 @@ public class Business {
         boolean isMinSDKM = Build.VERSION.SDK_INT < 23;
 //        boolean isGranted = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 //        if (isMinSDKM) {
-            mToken = token;
             startConfig(ssid,ssid_pwd,deviceId,handler);
             // 开启无线配对
 //            return;
@@ -236,8 +228,7 @@ public class Business {
             public void run() {
                 // TODO Auto-generated method stub
                 DeviceOnline req = new DeviceOnline();
-                mToken = token;
-                req.data.token = mToken;
+                req.data.token = token;
                 req.data.deviceId = deviceId; // 设备id。
                 RetObject retObject = null;
                 retObject = request(req);
