@@ -290,7 +290,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                 ConstraintMap params = new ConstraintMap();
                                 params.putString("event", "checkBindOrNot");
                                 params.putString("code", "-1");
-                                params.putString("value", "初始化设备失败");
+                                params.putString("value", "初始化设备失败:\n"+message);
                                 eventSink.success(params.toMap());
                             }
 //                            result.error("-7","初始化设备失败",null);
