@@ -106,7 +106,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
     }
 
     ///无线配对校验
-    private void checkBindOrNot(final String ssid, final String ssid_pwd, final String deviceId, final String token) {
+    private void checkBindOrNot(final String ssId, final String ssIdPwd, final String deviceId, final String token) {
         Business.getInstance().checkBindOrNot(deviceId,token, new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -125,7 +125,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             eventSink.success(params.toMap());
                         }
                         ///开启设备查找绑定流程
-                        showWifiConfig(ssid, ssid_pwd, deviceId,token);
+                        showWifiConfig(ssId, ssIdPwd, deviceId,token);
                     } else if (resp.data.isBind && resp.data.isMine) {
                         ///设备已经被自己绑定
 //                        result.error("-2","无线配对校验",retObject.mMsg);
