@@ -168,7 +168,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                         ConstraintMap params = new ConstraintMap();
                         params.putString("event", "checkBindOrNot");
                         params.putString("code", "-1");
-                        params.putString("value", "设备绑定异常:" + ssId + "\n" + ssIdPwd + "\n" + deviceId + "\n" + token + "\n" + "\n" + retObject.mMsg);
+                        params.putString("value", "设备绑定异常:" + retObject.mErrorCode);
                         eventSink.success(params.toMap());
                     }
                     Log.e("无线配对校验：", retObject.mMsg);
