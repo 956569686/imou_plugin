@@ -45,8 +45,8 @@ public class Business {
 //    private String mToken = ""; // userToken或accessToken
 
     private String mHost = "openapi.lechange.cn:443";
-    private String mAppId = "lc5bcb62d07bd146dd";
-    private String mAppSecret = "8a4c3e270ce54cc881537f7b2cc8fb";
+    private String mAppId = "lc019d22b99cc34e83";
+    private String mAppSecret = "7ba356d91a794ff0bbe25079acc533";
 
     private DeviceInitInfo deviceInitInfo;
 
