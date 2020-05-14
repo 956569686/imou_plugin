@@ -25,7 +25,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class CameraimoupluginPlugin implements MethodCallHandler {
 
     //初始化密匙
-    String key = "Hongwnet.com";
+    String key = "hgwL123456";
 
     private EventChannel.EventSink eventSink = null;
 
@@ -96,18 +96,18 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
             ///无线配对校验
-//            if (TextUtils.isEmpty(ssId) || TextUtils.isEmpty(ssIdPwd) || TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
-//                if (eventSink != null) {
-//                    ConstraintMap params = new ConstraintMap();
-//                    params.putString("event", "checkBindOrNot");
-//                    params.putString("code", "-1");
-//                    params.putString("value", "无线配对校验参数不合法");
-//                    eventSink.success(params.toMap());
-//                }
-//            } else {
-//                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
-//            }
-            bindDevice(deviceId.trim(),token.trim());
+            if (TextUtils.isEmpty(ssId) || TextUtils.isEmpty(ssIdPwd) || TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
+                if (eventSink != null) {
+                    ConstraintMap params = new ConstraintMap();
+                    params.putString("event", "checkBindOrNot");
+                    params.putString("code", "-1");
+                    params.putString("value", "无线配对校验参数不合法");
+                    eventSink.success(params.toMap());
+                }
+            } else {
+                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
+            }
+//            checkBindOrNot("hgwl", "hgwl1234567890", "5E04159PAJE23AE", "At_00005069d8ea210a49348026d1fe5489");
         } else if (call.method.equals("un_bind_camera")) {
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
@@ -219,7 +219,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             ConstraintMap params = new ConstraintMap();
                             params.putString("event", "checkBindOrNot");
                             params.putString("code", "-1");
-                            params.putString("value", "未找到设备:\n" + msg.obj);
+                            params.putString("value", "未找到设备");
                             eventSink.success(params.toMap());
                         }
                         Log.e("无线添加设备：", "未找到设备");
@@ -328,7 +328,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                     if (eventSink != null) {
                                         ConstraintMap params = new ConstraintMap();
                                         params.putString("event", "checkBindOrNot");
-                                        params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg+"\n"+((DeviceOnline.Response) retObject.resp).data.deviceId+"\n"+((DeviceOnline.Response) retObject.resp).data.onLine);
+                                        params.putString("value", "检查设备是否在线失败");
                                         eventSink.success(params.toMap());
                                     }
                                     Log.e("检查设备是否在线失败：", "检查设备是否在线失败");
@@ -339,7 +339,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                 if (eventSink != null) {
                                     ConstraintMap params = new ConstraintMap();
                                     params.putString("event", "checkBindOrNot");
-                                    params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg);
+                                    params.putString("value", "检查设备是否在线失败");
                                     eventSink.success(params.toMap());
                                 }
                                 Log.e("检查设备是否在线失败：", "检查设备是否在线失败");
@@ -349,7 +349,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                 if (eventSink != null) {
                                     ConstraintMap params = new ConstraintMap();
                                     params.putString("event", "checkBindOrNot");
-                                    params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg);
+                                    params.putString("value", "检查设备是否在线失败");
                                     eventSink.success(params.toMap());
                                 }
                                 Log.e("default检查设备是否在线失败：", "检查设备是否在线失败");
@@ -392,7 +392,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
      */
     private void bindDevice(String deviceId, final String token) {
         //设备绑定
-        Business.getInstance().bindDevice(deviceId, key.trim(), token,
+        Business.getInstance().bindDevice(deviceId, key, token,
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
@@ -410,7 +410,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             if (eventSink != null) {
                                 ConstraintMap params = new ConstraintMap();
                                 params.putString("event", "checkBindOrNot");
-                                params.putString("value", "设备绑定失败,请重置摄像机\n"+retObject.mMsg);
+                                params.putString("value", "设备绑定失败,请重置摄像机");
                                 eventSink.success(params.toMap());
                             }
 //                            result.error("-6","设备绑定失败",null);
