@@ -107,7 +107,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
 //            } else {
 //                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
 //            }
-            bindDevice(deviceId,token);
+            bindDevice(deviceId.trim(),token.trim());
         } else if (call.method.equals("un_bind_camera")) {
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
@@ -392,7 +392,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
      */
     private void bindDevice(String deviceId, final String token) {
         //设备绑定
-        Business.getInstance().bindDevice(deviceId, key, token,
+        Business.getInstance().bindDevice(deviceId, key.trim(), token,
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
