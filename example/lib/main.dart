@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
     String bindResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      bindResult = await Cameraimouplugin.loginAndBind(ssid, ssidPwd, deviceId,token);
+      bindResult = await Cameraimouplugin.loginAndBind(deviceId,token);
     } on PlatformException {
       bindResult = '摄像头绑定异常.';
     }

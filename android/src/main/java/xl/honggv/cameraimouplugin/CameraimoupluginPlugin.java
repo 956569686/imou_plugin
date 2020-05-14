@@ -91,8 +91,6 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             });
         } else if (call.method.equals("bind_camera")) {
             ///获取参数
-            String ssId = call.argument("ssId");
-            String ssIdPwd = call.argument("ssIdPwd");
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
             ///无线配对校验
