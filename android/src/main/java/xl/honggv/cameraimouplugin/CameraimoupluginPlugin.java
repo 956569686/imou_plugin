@@ -328,7 +328,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                     if (eventSink != null) {
                                         ConstraintMap params = new ConstraintMap();
                                         params.putString("event", "checkBindOrNot");
-                                        params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg);
+                                        params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg+"\n"+((DeviceOnline.Response) retObject.resp).data.toString());
                                         eventSink.success(params.toMap());
                                     }
                                     Log.e("检查设备是否在线失败：", "检查设备是否在线失败");
