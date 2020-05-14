@@ -208,8 +208,8 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
         });
     }
 
-    private void showWifiConfig(String ssid, String ssid_pwd, final String deviceId, final String token) {
-        Business.getInstance().showWifiConfig(ssid, ssid_pwd, deviceId, token, new Handler() {
+    private void showWifiConfig(String ssId, String ssIdPwd, final String deviceId, final String token) {
+        Business.getInstance().showWifiConfig(ssId, ssIdPwd, deviceId, token, new Handler() {
             public void handleMessage(final Message msg) {
                 if (msg.what < 0) {
                     if (msg.what == -2) {
@@ -219,7 +219,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             ConstraintMap params = new ConstraintMap();
                             params.putString("event", "checkBindOrNot");
                             params.putString("code", "-1");
-                            params.putString("value", "未找到设备");
+                            params.putString("value", "未找到设备:\n" + msg.obj);
                             eventSink.success(params.toMap());
                         }
                         Log.e("无线添加设备：", "未找到设备");
