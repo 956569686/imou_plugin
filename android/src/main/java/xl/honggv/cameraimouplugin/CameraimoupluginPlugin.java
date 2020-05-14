@@ -410,7 +410,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                             if (eventSink != null) {
                                 ConstraintMap params = new ConstraintMap();
                                 params.putString("event", "checkBindOrNot");
-                                params.putString("value", "设备绑定失败,请重置摄像机");
+                                params.putString("value", "设备绑定失败,请重置摄像机\n"+retObject.mMsg);
                                 eventSink.success(params.toMap());
                             }
 //                            result.error("-6","设备绑定失败",null);
