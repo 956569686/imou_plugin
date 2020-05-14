@@ -328,7 +328,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                     if (eventSink != null) {
                                         ConstraintMap params = new ConstraintMap();
                                         params.putString("event", "checkBindOrNot");
-                                        params.putString("value", "检查设备是否在线失败");
+                                        params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg);
                                         eventSink.success(params.toMap());
                                     }
                                     Log.e("检查设备是否在线失败：", "检查设备是否在线失败");
@@ -339,7 +339,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                 if (eventSink != null) {
                                     ConstraintMap params = new ConstraintMap();
                                     params.putString("event", "checkBindOrNot");
-                                    params.putString("value", "检查设备是否在线失败");
+                                    params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg);
                                     eventSink.success(params.toMap());
                                 }
                                 Log.e("检查设备是否在线失败：", "检查设备是否在线失败");
@@ -349,7 +349,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                                 if (eventSink != null) {
                                     ConstraintMap params = new ConstraintMap();
                                     params.putString("event", "checkBindOrNot");
-                                    params.putString("value", "检查设备是否在线失败");
+                                    params.putString("value", "检查设备是否在线失败:\n"+retObject.mMsg);
                                     eventSink.success(params.toMap());
                                 }
                                 Log.e("default检查设备是否在线失败：", "检查设备是否在线失败");
