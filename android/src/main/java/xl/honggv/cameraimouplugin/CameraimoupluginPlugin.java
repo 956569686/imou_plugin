@@ -25,7 +25,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class CameraimoupluginPlugin implements MethodCallHandler {
 
     //初始化密匙
-    String key = "hgwL123456";
+    String key = "Hongwnet.com";
 
     private EventChannel.EventSink eventSink = null;
 
