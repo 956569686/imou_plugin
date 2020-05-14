@@ -25,7 +25,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class CameraimoupluginPlugin implements MethodCallHandler {
 
     //初始化密匙
-    String key = "hgwL123456";
+    String key = "Hongwnet.com";
 
     private EventChannel.EventSink eventSink = null;
 
@@ -96,18 +96,18 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
             ///无线配对校验
-            if (TextUtils.isEmpty(ssId) || TextUtils.isEmpty(ssIdPwd) || TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
-                if (eventSink != null) {
-                    ConstraintMap params = new ConstraintMap();
-                    params.putString("event", "checkBindOrNot");
-                    params.putString("code", "-1");
-                    params.putString("value", "无线配对校验参数不合法");
-                    eventSink.success(params.toMap());
-                }
-            } else {
-                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
-            }
-//            checkBindOrNot("hgwl", "hgwl1234567890", "5E04159PAJE23AE", "At_00005069d8ea210a49348026d1fe5489");
+//            if (TextUtils.isEmpty(ssId) || TextUtils.isEmpty(ssIdPwd) || TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
+//                if (eventSink != null) {
+//                    ConstraintMap params = new ConstraintMap();
+//                    params.putString("event", "checkBindOrNot");
+//                    params.putString("code", "-1");
+//                    params.putString("value", "无线配对校验参数不合法");
+//                    eventSink.success(params.toMap());
+//                }
+//            } else {
+//                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
+//            }
+            bindDevice(deviceId,token);
         } else if (call.method.equals("un_bind_camera")) {
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
