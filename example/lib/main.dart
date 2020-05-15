@@ -98,12 +98,8 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> bindCamera(String ssid,String ssidPwd,String deviceId) async {
     String bindResult;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      bindResult = await Cameraimouplugin.loginAndBind(ssid, ssidPwd, deviceId);
-    } on PlatformException {
-      bindResult = '摄像头绑定异常.';
-    }
+
+    Cameraimouplugin.loginAndBind(ssid, ssidPwd, deviceId);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -118,11 +114,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> unBindCamera(String deviceId,String token) async {
     String unBindResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      unBindResult = await Cameraimouplugin.unBindDevice(deviceId,token);
-    } on PlatformException {
-      unBindResult = '解绑摄像头异常.';
-    }
+    Cameraimouplugin.unBindDevice(deviceId,token);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -148,7 +140,7 @@ class _MyAppState extends State<MyApp> {
             ),
 
             FlatButton(
-              onPressed: () => bindCamera("hgwl","hgwl1234567890","5E04159PAJE23AE",_platformVersion),
+              onPressed: () => bindCamera("hgwl","hgwl1234567890","5E04159PAJE23AE"),
               child: Container(
                 width: 200,
                 height: 50,

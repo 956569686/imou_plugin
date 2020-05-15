@@ -12,11 +12,13 @@ class Cameraimouplugin {
   }
 
   ///绑定摄像头
-  static void loginAndBind(String deviceId, String token) async {
-    await _channel.invokeMethod(
+  static void loginAndBind(
+      String ssid, String ssidPwd, String deviceId) async {
+    final String version = await _channel.invokeMethod(
         'bind_camera', <String, dynamic>{
-      'deviceId': deviceId,
-      'token': token
+      'ssid': ssid,
+      'ssidPwd': ssidPwd,
+      'deviceId': deviceId
     });
   }
 
