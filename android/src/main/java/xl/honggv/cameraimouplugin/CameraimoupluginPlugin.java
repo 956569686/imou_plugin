@@ -94,18 +94,19 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
             ///无线配对校验
-//            if (TextUtils.isEmpty(ssId) || TextUtils.isEmpty(ssIdPwd) || TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
-//                if (eventSink != null) {
-//                    ConstraintMap params = new ConstraintMap();
-//                    params.putString("event", "checkBindOrNot");
-//                    params.putString("code", "-1");
-//                    params.putString("value", "无线配对校验参数不合法");
-//                    eventSink.success(params.toMap());
-//                }
-//            } else {
+            if (TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
+                if (eventSink != null) {
+                    ConstraintMap params = new ConstraintMap();
+                    params.putString("event", "checkBindOrNot");
+                    params.putString("code", "-1");
+                    params.putString("value", "无线配对校验参数不合法");
+                    eventSink.success(params.toMap());
+                }
+            } else {
+                bindDevice(deviceId.trim(), token.trim());
 //                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
-//            }
-            bindDevice(deviceId.trim(), token.trim());
+            }
+
         } else if (call.method.equals("un_bind_camera")) {
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
