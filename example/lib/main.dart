@@ -96,11 +96,11 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<void> bindCamera(String ssid,String ssidPwd,String deviceId,String token) async {
+  Future<void> bindCamera(String ssid,String ssidPwd,String deviceId) async {
     String bindResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      bindResult = await Cameraimouplugin.loginAndBind(deviceId,token);
+      bindResult = await Cameraimouplugin.loginAndBind(ssid, ssidPwd, deviceId);
     } on PlatformException {
       bindResult = '摄像头绑定异常.';
     }

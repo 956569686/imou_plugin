@@ -91,10 +91,13 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
             });
         } else if (call.method.equals("bind_camera")) {
             ///获取参数
+            String ssId = call.argument("ssId");
+            String ssIdPwd = call.argument("ssIdPwd");
             String deviceId = call.argument("deviceId");
             String token = call.argument("token");
             ///无线配对校验
-            if (TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
+            ///无线配对校验
+            if (TextUtils.isEmpty(ssId) || TextUtils.isEmpty(ssIdPwd) || TextUtils.isEmpty(deviceId) || TextUtils.isEmpty(token)) {
                 if (eventSink != null) {
                     ConstraintMap params = new ConstraintMap();
                     params.putString("event", "checkBindOrNot");
@@ -103,8 +106,7 @@ public class CameraimoupluginPlugin implements MethodCallHandler {
                     eventSink.success(params.toMap());
                 }
             } else {
-                bindDevice(deviceId.trim(), token.trim());
-//                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
+                checkBindOrNot(ssId.trim(), ssIdPwd.trim(), deviceId.trim(), token.trim());
             }
 
         } else if (call.method.equals("un_bind_camera")) {
